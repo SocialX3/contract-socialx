@@ -22,7 +22,6 @@
   - Terminal 2: `npm run d:l`
 - deploy on blockchain network
   - `npm run d:fbchain`
-  - `npm run d:okchain`
 
 All scripts is in `package.json` file.
 
