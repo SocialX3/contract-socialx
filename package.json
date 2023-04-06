@@ -1,0 +1,31 @@
+{
+  "name": "social-x",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat compile && node batch/abi.ts",
+    "node": "npx hardhat node",
+    "test": "npx hardhat test",
+    "coverage": "npx hardhat coverage && npx http-server ./coverage/ -o",
+    "gas": "REPORT_GAS=true npx hardhat test",
+    "d": "npx hardhat run scripts/deploy.ts",
+    "d:l": "npx hardhat run scripts/deploy.ts --network localhost",
+    "d:fbchain": "npx hardhat run scripts/deploy.ts --network fbchain",
+    "d:f:d": "npx hardhat run scripts/deploy.ts --network fbchain",
+    "d:o": "npx hardhat run scripts/deploy.ts --network okchain",
+    "remixd": "open http://remix.ethereum.org/ && remixd -s  ./  --remix-ide http://remix.ethereum.org/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "dotenv": "^16.0.3",
+    "hardhat": "^2.12.2",
+    "web3": "^1.9.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "4.0.0"
+  }
+}
