@@ -46,35 +46,35 @@ describe('SocialX', function () {
   describe('Topic', async function () {
     it('create', async function () {
       const { socialX } = await loadFixture(deployOneYearLockFixture)
-      const tx = await socialX.create(config.channel_id, config.signData, create.node_index, create.title, create.content)
+      const tx = await socialX.create(config.app_id, config.signData, create.node_index, create.title, create.content)
 
       const result = await tx.wait()
-      const TXInfo = await socialX.channels(1)
+      const TXInfo = await socialX.apps(1)
       expect(TXInfo.topics).to.equal(1)
     })
 
     it('append', async function () {
       const { socialX } = await loadFixture(deployOneYearLockFixture)
-      const tx = await socialX.append(config.channel_id, config.signData, append.topic_location, append.topic_hash, append.content)
+      const tx = await socialX.append(config.app_id, config.signData, append.topic_location, append.topic_hash, append.content)
 
       const result = await tx.wait()
       // console.log('result', result.transactionHash)
-      const TXInfo1 = await socialX.channels(1)
+      const TXInfo1 = await socialX.apps(1)
       expect(TXInfo1.appends).to.equal(1)
 
-      const tx2 = await socialX.append(config.channel_id, config.signData, append.topic_location, append.topic_hash, append.content)
+      const tx2 = await socialX.append(config.app_id, config.signData, append.topic_location, append.topic_hash, append.content)
 
-      const TXInfo2 = await socialX.channels(1)
+      const TXInfo2 = await socialX.apps(1)
       expect(TXInfo2.appends).to.equal(2)
     })
 
     it('reply', async function () {
       const { socialX } = await loadFixture(deployOneYearLockFixture)
       // console.log('socialX', socialX.functions)
-      const tx1 = await socialX['reply(uint256,bytes,uint256,string,string)'](config.channel_id, config.signData, repay.topic_location, repay.topic_hash, repay.content)
+      const tx1 = await socialX['reply(uint256,bytes,uint256,string,string)'](config.app_id, config.signData, repay.topic_location, repay.topic_hash, repay.content)
       const result1 = await tx1.wait()
 
-      const tx2 = await socialX['reply(uint256,bytes,uint256,string,string,uint256,string)'](config.channel_id, config.signData, repay.topic_location, repay.topic_hash, repay.content, repay.reply_location, repay.reply_hash)
+      const tx2 = await socialX['reply(uint256,bytes,uint256,string,string,uint256,string)'](config.app_id, config.signData, repay.topic_location, repay.topic_hash, repay.content, repay.reply_location, repay.reply_hash)
       const result2 = await tx2.wait()
       // console.log('result', result.transactionHash)
     })
@@ -90,7 +90,7 @@ describe('SocialX', function () {
         arr.push(info)
       })
 
-      const tx = await socialX.attributes(config.channel_id, config.signData, arr)
+      const tx = await socialX.attributes(config.app_id, config.signData, arr)
 
       const result = await tx.wait()
       // console.log('result', result.transactionHash)

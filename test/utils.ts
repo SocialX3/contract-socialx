@@ -13,7 +13,7 @@
 type HSL = { h: number; s: number; l: number }
 
 type Create = {
-  channel_id: number
+  app_id: number
   message: string
   signature: string
   node_id: number
@@ -21,7 +21,7 @@ type Create = {
   content: string
 }
 type Append = {
-  channel_id: number
+  app_id: number
   message: string
   signature: string
   topic_location: number
@@ -29,7 +29,7 @@ type Append = {
   content: string
 }
 type Reply = {
-  channel_id: number
+  app_id: number
   message: string
   signature: string
   topic_location: number
@@ -39,13 +39,13 @@ type Reply = {
   content: string
 }
 type Attributes = {
-  channel_id: number
+  app_id: number
   message: string
   signature: string
   data: string
 }
 type Follow = {
-  channel_id: number
+  app_id: number
   message: string
   signature: string
   target: string
@@ -123,7 +123,7 @@ export const HSLToHex = (hsl: HSL): string => {
     g = 0
     b = x
   }
-  // Having obtained RGB, convert channels to hex
+  // Having obtained RGB, convert apps to hex
   let rStr = Math.round((r + m) * 255).toString(16)
   let gStr = Math.round((g + m) * 255).toString(16)
   let bStr = Math.round((b + m) * 255).toString(16)

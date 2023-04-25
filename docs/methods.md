@@ -11,7 +11,7 @@
 
 ### create: 创建主题
 
-- `uint256`channel_id: 频道 ID
+- `uint256`app_id: 应用 ID
 - `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
 - `uint256` node_id:节点 ID
 - `string` title: 主题标题
@@ -19,7 +19,7 @@
 
 ### append: 追加主题
 
-- `uint256`channel_id: 频道 ID
+- `uint256`app_id: 应用 ID
 - `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
 - `uint256` target_location_id:主题的网络位置
 - `string` topic_hash:主题哈希
@@ -27,7 +27,7 @@
 
 ### reply: 回复主题
 
-- `uint256`channel_id: 频道 ID
+- `uint256`app_id: 应用 ID
 - `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
 - `uint256` target_location_id:主题的网络位置
 - `string` topic_hash:主题哈希
@@ -37,13 +37,13 @@
 
 ### attributes: 填写地址属性
 
-- `uint256`channel_id: 频道 ID
+- `uint256`app_id: 应用 ID
 - `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
 - `bytes[]` data: 属性的 `key+value`
 
 ### follow: 关注
 
-- `uint256`channel_id: 频道 ID
+- `uint256` app_id: 应用 ID
 - `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
 - `address` target_address: 目标地址
 - `bool` follow_status: follow 状态
@@ -60,7 +60,7 @@
   - `102`: Polygon
   - `103`: Optimism
   - `104`: Arbitrum
-- channels(channelId): 指定频道 ID 的统计信息
+- apps(appId): 指定应用 ID 的统计信息
   - `uint256` topics; 主题数量
   - `uint256` appends; 追加数量
   - `uint256` repays; 回复数量
@@ -74,11 +74,11 @@
 
 ## ✅ 事件
 
-- `event Create(uint256 indexed channel_id, uint256 topic_id);`: 创建的时候抛出
-- `event Append(uint256 indexed channel_id, uint256 append_id);`: 追加的时候抛出
-- `event Reply(uint256 indexed channel_id, uint256 repay_id);`: 回复的时候抛出
-- `event Attributes(uint256 indexed channel_id);`: 创建/更新个人地址相关属性的时候抛出
-- `event Follow(uint256 indexed channel_id);`: 关注的时候抛出
+- `event Create(uint256 indexed app_id, uint256 topic_id);`: 创建的时候抛出
+- `event Append(uint256 indexed app_id, uint256 append_id);`: 追加的时候抛出
+- `event Reply(uint256 indexed app_id, uint256 repay_id);`: 回复的时候抛出
+- `event Attributes(uint256 indexed app_id);`: 创建/更新个人地址相关属性的时候抛出
+- `event Follow(uint256 indexed app_id);`: 关注的时候抛出
 - `event SignType(uint256 indexed _stid, string name, string description);`: 增加/修改，加密类型的时候抛出
 
 ## 🔒 管理功能

@@ -1,5 +1,5 @@
 export const config = {
-  channel_id: 1,
+  app_id: 1,
   message: '0x0000000000000000000000000000000000000000000000000000000000000001',
   address: '',
   signature: '',
