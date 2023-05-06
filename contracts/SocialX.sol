@@ -11,7 +11,7 @@ contract SocialX {
     event Create(uint256 indexed app_id, uint256 topic_id);
     event Append(uint256 indexed app_id, uint256 append_id);
     event Reply(uint256 indexed app_id, uint256 repay_id);
-    event Attributes(uint256 indexed app_id);
+    event Tags(uint256 indexed app_id);
     event Follow(uint256 indexed app_id);
     constructor(uint256 location_id) {
         LOCATION_ID = location_id;
@@ -29,8 +29,8 @@ contract SocialX {
     function reply(uint256 app_id, bytes calldata sign_data, uint256 target_location_id, string calldata topic_hash, string calldata content, uint256 target_reply_location_id, string calldata reply_hash) external {
         emit Reply(app_id, ++apps[app_id].repays);
     }
-    function attributes(uint256 app_id, bytes calldata sign_data, bytes[] calldata data) external {
-        emit Attributes(app_id);
+    function tags(uint256 app_id, bytes calldata sign_data, bytes[] calldata data) external {
+        emit Tags(app_id);
     }
     function follow(uint256 app_id, bytes calldata sign_data, address target_address, bool follow_status, string calldata remark) external {
         emit Follow(app_id);

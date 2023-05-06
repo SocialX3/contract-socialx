@@ -38,7 +38,7 @@ type Reply = {
   reply_hash: string
   content: string
 }
-type Attributes = {
+type Tags = {
   app_id: number
   message: string
   signature: string

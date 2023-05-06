@@ -1,4 +1,4 @@
-export const attributes = {
+export const tags = {
   name: 'Anbang',
   email: 'anbang@www.com',
   website: 'https://bitcoin.org/',

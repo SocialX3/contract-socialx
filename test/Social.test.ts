@@ -6,7 +6,7 @@ import { config } from './helpers/config'
 import { create } from './helpers/create'
 import { append } from './helpers/append'
 import { repay } from './helpers/repay'
-import { attributes } from './helpers/attributes'
+import { tags } from './helpers/tags'
 export { default as jsNumberForAddress } from './utils'
 
 describe('SocialX', function () {
@@ -79,18 +79,18 @@ describe('SocialX', function () {
       // console.log('result', result.transactionHash)
     })
 
-    it('attributes', async function () {
+    it('tags', async function () {
       const { socialX } = await loadFixture(deployOneYearLockFixture)
 
       let arr: any[] = []
-      Object.keys(attributes).map((item) => {
+      Object.keys(tags).map((item) => {
         // arr.push(web3.utils.asciiToHex(`${item} ${opt[item]}`))
-        const info = ethers.utils.hexlify(ethers.utils.toUtf8Bytes(`${item} ${attributes[item]}`))
+        const info = ethers.utils.hexlify(ethers.utils.toUtf8Bytes(`${item} ${tags[item]}`))
         // console.log(`${item} ${opt[item]}`, info)
         arr.push(info)
       })
 
-      const tx = await socialX.attributes(config.app_id, config.signData, arr)
+      const tx = await socialX.tags(config.app_id, config.signData, arr)
 
       const result = await tx.wait()
       // console.log('result', result.transactionHash)

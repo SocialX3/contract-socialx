@@ -35,7 +35,7 @@
 - `string` reply_location:某条回复的网络位置(如果不针对"回复"进行回复，无该参数)
 - `string` reply_hash: 某条回复的网络哈希(如果不针对"回复"进行回复，无该参数)
 
-### attributes: 填写地址属性
+### tags: 填写地址属性
 
 - `uint256`app_id: 应用 ID
 - `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
@@ -77,7 +77,7 @@
 - `event Create(uint256 indexed app_id, uint256 topic_id);`: 创建的时候抛出
 - `event Append(uint256 indexed app_id, uint256 append_id);`: 追加的时候抛出
 - `event Reply(uint256 indexed app_id, uint256 repay_id);`: 回复的时候抛出
-- `event Attributes(uint256 indexed app_id);`: 创建/更新个人地址相关属性的时候抛出
+- `event Tags(uint256 indexed app_id);`: 创建/更新个人地址相关属性的时候抛出
 - `event Follow(uint256 indexed app_id);`: 关注的时候抛出
 - `event SignType(uint256 indexed _stid, string name, string description);`: 增加/修改，加密类型的时候抛出
 
