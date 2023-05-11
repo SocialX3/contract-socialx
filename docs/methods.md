@@ -9,6 +9,13 @@
 
 ## ✅ 核心
 
+sign_data 说明:
+
+- **上链方式 1**: 作者付手续费:传 `0x`
+- **上链方式 2**: 作者授权发布: 作者需要先做 `approve`，然后发布者上传时，使用 `abi.encode(['uint256', 'address'], ['0', author.address])`。授权额度不足时会报错 `insufficient allowance`
+- **上链方式 3**: 作者签名发布: 作者每次都需要签名，使用 `abi.encode(['uint256', 'address', 'string', 'string'],[SignTypeId,SignAddress,SignMessage,SignResult])`。
+  - 签名方式: https://github.com/Social-xxx/sign-type-list
+
 ### create: 创建主题
 
 - `uint256`app_id: 应用 ID
@@ -49,6 +56,11 @@
 - `bool` follow_status: follow 状态
 - `string` remark: 备注信息
 
+### approve: 授权
+
+- `_agent`: 代理人
+- `_value`: 额度
+
 ## ✅ 只读信息
 
 - LOCATION_ID : 网络位置。不同的区块链网络的该值是不同的，可以通过该值判断网络位置。
@@ -71,6 +83,7 @@
   - `uint256` creation_time; 创建时间
 - allSignatureTypes: 获取所有代发交易的加密类型
   - 返回内容是数组，元素内参考 `signatureTypes`
+- allowance(`_owner`, `_agent`): 查看代理人拥有作者的授权额度
 
 ## ✅ 事件
 
@@ -80,6 +93,7 @@
 - `event Tags(uint256 indexed app_id);`: 创建/更新个人地址相关属性的时候抛出
 - `event Follow(uint256 indexed app_id);`: 关注的时候抛出
 - `event SignType(uint256 indexed _stid, string name, string description);`: 增加/修改，加密类型的时候抛出
+- `event Approval(address indexed _owner, address indexed _agent, uint256 _value);`: 授权事件
 
 ## 🔒 管理功能
 

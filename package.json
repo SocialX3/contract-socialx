@@ -12,7 +12,7 @@
     "d": "npx hardhat run scripts/deploy.ts",
     "d:l": "npx hardhat run scripts/deploy.ts --network localhost",
     "d:fbchain": "npx hardhat run scripts/deploy.ts --network fbchain",
-    "d:f:d": "npx hardhat run scripts/deploy.ts --network fbchain",
+    "d:f": "npm run d:fbchain",
     "d:o": "npx hardhat run scripts/deploy.ts --network okchain",
     "remixd": "open http://remix.ethereum.org/ && remixd -s  ./  --remix-ide http://remix.ethereum.org/"
   },
