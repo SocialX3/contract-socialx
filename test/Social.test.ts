@@ -48,18 +48,24 @@ describe('SocialX', function () {
     const { socialX, user1, user2 } = await loadFixture(deployOneYearLockFixture)
     // user1 是 owner
     // user2 是 agent
-    expect(await socialX.allowance(user1.address, user2.address)).to.equal(0)
+    const abi = ethers.utils.defaultAbiCoder
+    const signDataAgent = abi.encode(['uint256', 'address'], ['0', user1.address])
+    const signDataParse = abi.decode(['uint256', 'address'], signDataAgent)
+    // console.log('log,', user1.address, signDataAgent)
 
+    expect(await socialX.allowance(user1.address, user2.address)).to.equal(0)
     await expect(socialX.connect(user2).create(config.app_id, config.signDataAgent, create.node_index, create.title, create.content)).to.be.revertedWith('insufficient allowance')
 
     await socialX.connect(user1).approve(user2.address, 10) // 授权
     expect(await socialX.allowance(user1.address, user2.address)).to.equal(10)
     await socialX.connect(user2).create(config.app_id, config.signDataAgent, create.node_index, create.title, create.content)
+
     expect(await socialX.allowance(user1.address, user2.address)).to.equal(9)
 
     await socialX.connect(user1).approve(user2.address, 3)
     expect(await socialX.allowance(user1.address, user2.address)).to.equal(3)
   })
+
   describe('Topic', async function () {
     it('create', async function () {
       const { socialX, user1, user2 } = await loadFixture(deployOneYearLockFixture)
@@ -84,7 +90,6 @@ describe('SocialX', function () {
       const TXInfo3 = await socialX.apps(APP_ID)
       expect(TXInfo3.topics).to.equal(3)
     })
-
     it('append', async function () {
       const { socialX, user1, user2 } = await loadFixture(deployOneYearLockFixture)
       // 自己发布

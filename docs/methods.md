@@ -26,7 +26,7 @@ data 说明:
 
 - **上链方式 1**: 作者付手续费:传 `0x`
 - **上链方式 2**: 作者授权发布: 作者需要先做 `approve`，然后发布者上传时，使用 `abi.encode(['uint256', 'address'], ['0', author.address])`。授权额度不足时会报错 `insufficient allowance`
-- **上链方式 3**: 作者签名发布: 作者每次都需要签名，使用 `abi.encode(['uint256', 'address', 'string', 'string'],[SignTypeId,SignAddress,SignMessage,SignResult])`。
+- **上链方式 3**: 作者签名发布: 作者每次都需要签名，使用 `abi.encode(['uint256', 'string', 'string', 'string'],[SignTypeId,SignAddress,SignMessage,SignResult])`。
   - 签名方式: https://github.com/Social-xxx/sign-type-list
 
 ### create: 创建主题

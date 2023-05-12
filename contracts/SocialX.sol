@@ -28,7 +28,7 @@ contract SocialX {
         }
         _;
     }
-    // @param data Consists of {SignTypeId}{SignAddress}{SignMessage}{SignResult} padded.  abi.encode(['uint256', 'address', 'string', 'string'],[SignTypeId,SignAddress,SignMessage,SignResult])
+    // @param data Consists of {SignTypeId}{SignAddress}{SignMessage}{SignResult} padded.  abi.encode(['uint256', 'address/string', 'string', 'string'],[SignTypeId,SignAddress,SignMessage,SignResult])
     function create(uint256 app_id, bytes calldata data, uint256 node_id, string calldata title, string calldata content) external predict(data) {
         emit Create(app_id, ++apps[app_id].topics);
     }
