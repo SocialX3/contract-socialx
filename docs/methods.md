@@ -1,5 +1,10 @@
 # SocialX Contract 说明文档
 
+## 更新日志
+
+- 2023 年 5 月 11 日: 增加授权发布方式
+- 2023 年 5 月 12 日: 参数 `sign_data` 修改为 `data`。原 `tage()` 方法内 `data 修改为 user_data`
+
 ## 方法
 
 - 核心
@@ -9,7 +14,7 @@
 
 ## ✅ 核心
 
-sign_data 说明:
+data 说明:
 
 - **上链方式 1**: 作者付手续费:传 `0x`
 - **上链方式 2**: 作者授权发布: 作者需要先做 `approve`，然后发布者上传时，使用 `abi.encode(['uint256', 'address'], ['0', author.address])`。授权额度不足时会报错 `insufficient allowance`
@@ -19,7 +24,7 @@ sign_data 说明:
 ### create: 创建主题
 
 - `uint256`app_id: 应用 ID
-- `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
+- `bytes` data: 代发的相关信息，自己支付上链手续费传"0x"
 - `uint256` node_id:节点 ID
 - `string` title: 主题标题
 - `string` content: 主题内容
@@ -27,7 +32,7 @@ sign_data 说明:
 ### append: 追加主题
 
 - `uint256`app_id: 应用 ID
-- `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
+- `bytes` data: 代发的相关信息，自己支付上链手续费传"0x"
 - `uint256` target_location_id:主题的网络位置
 - `string` topic_hash:主题哈希
 - `string` content: 追加内容
@@ -35,7 +40,7 @@ sign_data 说明:
 ### reply: 回复主题
 
 - `uint256`app_id: 应用 ID
-- `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
+- `bytes` data: 代发的相关信息，自己支付上链手续费传"0x"
 - `uint256` target_location_id:主题的网络位置
 - `string` topic_hash:主题哈希
 - `string` content: 回复内容
@@ -45,13 +50,13 @@ sign_data 说明:
 ### tags: 填写地址属性
 
 - `uint256`app_id: 应用 ID
-- `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
-- `bytes[]` data: 属性的 `key+value`
+- `bytes` data: 代发的相关信息，自己支付上链手续费传"0x"
+- `bytes[]` user_data: 属性的 `key+value`
 
 ### follow: 关注
 
 - `uint256` app_id: 应用 ID
-- `bytes` sign_data: 代发的相关信息，自己支付上链手续费传"0x"
+- `bytes` data: 代发的相关信息，自己支付上链手续费传"0x"
 - `address` target_address: 目标地址
 - `bool` follow_status: follow 状态
 - `string` remark: 备注信息
