@@ -6,11 +6,11 @@ console.log('hre.network.name', hre.network.name)
 // ************ 配置:开始 ************
 const CONFIG = {
   fbchain: {
-    locationId: 1,
+    networkId: 1,
   },
   // hardhat / okchain
   okchain: {
-    locationId: 2,
+    networkId: 2,
   },
 }
 const config = CONFIG[hre.network.name]
@@ -19,7 +19,7 @@ const config = CONFIG[hre.network.name]
 // current network info
 console.log('\n ============ BASIC  INFO ============')
 console.log('✅ Current Network   :', hre.network.name)
-console.log('        locationId   :', config.locationId)
+console.log('        networkId   :', config.networkId)
 console.log('   Network Url       :', hre.network.config.url || 'hardhat temp network')
 
 async function main() {
@@ -30,7 +30,7 @@ async function main() {
 
   //deploy
   const Social = await ethers.getContractFactory('SocialX')
-  const SocialContract = await Social.deploy(config.locationId)
+  const SocialContract = await Social.deploy(config.networkId)
   await SocialContract.deployed()
   console.log(`SocialX              : ${SocialContract.address}`)
 

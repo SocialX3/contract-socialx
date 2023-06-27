@@ -1,5 +1,5 @@
 export const append = {
-  topic_location: 1,
+  topic_network_id: 1,
   topic_hash: '0xc7fad7eb7eaca76c0279dd6083e86ab72ddae1d8a2f71d302a1e3ae9e5bf9be2',
   content: `### Title
 

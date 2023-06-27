@@ -24,7 +24,7 @@ type Append = {
   app_id: number
   message: string
   signature: string
-  topic_location: number
+  topic_network_id: number
   topic_hash: string
   content: string
 }
@@ -32,9 +32,9 @@ type Reply = {
   app_id: number
   message: string
   signature: string
-  topic_location: number
+  topic_network_id: number
   topic_hash: string
-  reply_location: string
+  reply_network_id: string
   reply_hash: string
   content: string
 }

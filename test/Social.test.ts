@@ -14,10 +14,10 @@ describe('SocialX', function () {
   async function deployOneYearLockFixture() {
     const [owner, user1, user2, user3, user4, user5, user6, user7, user8, user9, user10] = await ethers.getSigners()
 
-    const locationId = 1
+    const networkId = 1
     //deploy
     const Social = await ethers.getContractFactory('SocialX')
-    const socialX = await Social.deploy(locationId)
+    const socialX = await Social.deploy(networkId)
     await socialX.deployed()
 
     return {
@@ -40,9 +40,9 @@ describe('SocialX', function () {
       socialX,
     }
   }
-  it('LOCATION_ID', async function () {
+  it('NETWORK_ID', async function () {
     const { socialX, user1, user2 } = await loadFixture(deployOneYearLockFixture)
-    expect(await socialX.LOCATION_ID()).to.equal(1)
+    expect(await socialX.NETWORK_ID()).to.equal(1)
   })
   it('Approve & allowance', async function () {
     const { socialX, user1, user2 } = await loadFixture(deployOneYearLockFixture)
@@ -88,25 +88,25 @@ describe('SocialX', function () {
     it('append', async function () {
       const { socialX, user1, user2 } = await loadFixture(deployOneYearLockFixture)
       // 自己发布
-      const tx = await socialX.append(config.app_id, config.signData, append.topic_location, append.topic_hash, append.content)
+      const tx = await socialX.append(config.app_id, config.signData, append.topic_network_id, append.topic_hash, append.content)
       const result = await tx.wait()
       // console.log('result', result.transactionHash)
       const TXInfo1 = await socialX.apps(APP_ID)
       expect(TXInfo1.appends).to.equal(1)
-      const tx2 = await socialX.append(config.app_id, config.signData, append.topic_location, append.topic_hash, append.content)
+      const tx2 = await socialX.append(config.app_id, config.signData, append.topic_network_id, append.topic_hash, append.content)
       const TXInfo2 = await socialX.apps(APP_ID)
       expect(TXInfo2.appends).to.equal(2)
 
       // 授权发布:signDataAgent
       await socialX.connect(user1).approve(user2.address, 10) // 授权
-      const tx3 = await socialX.connect(user2).append(config.app_id, config.signDataAgent, append.topic_location, append.topic_hash, append.content)
+      const tx3 = await socialX.connect(user2).append(config.app_id, config.signDataAgent, append.topic_network_id, append.topic_hash, append.content)
       const result2 = await tx3.wait()
       expect(await socialX.allowance(user1.address, user2.address)).to.equal(9)
       const TXInfo3 = await socialX.apps(APP_ID)
       expect(TXInfo3.appends).to.equal(3)
 
       // 签名发布:signDataSingle
-      const tx4 = await socialX.append(config.app_id, config.signDataSingle, append.topic_location, append.topic_hash, append.content)
+      const tx4 = await socialX.append(config.app_id, config.signDataSingle, append.topic_network_id, append.topic_hash, append.content)
       const result4 = await tx4.wait()
       const TXInfo4 = await socialX.apps(APP_ID)
       expect(TXInfo4.appends).to.equal(4)
@@ -116,23 +116,23 @@ describe('SocialX', function () {
       const { socialX, user1, user2 } = await loadFixture(deployOneYearLockFixture)
       // 自己发布
       // console.log('socialX', socialX.functions)
-      const tx1 = await socialX['reply(uint256,bytes,uint256,string,string)'](config.app_id, config.signData, repay.topic_location, repay.topic_hash, repay.content)
+      const tx1 = await socialX['reply(uint256,bytes,uint256,string,string)'](config.app_id, config.signData, repay.topic_network_id, repay.topic_hash, repay.content)
       const result1 = await tx1.wait()
 
-      const tx2 = await socialX['reply(uint256,bytes,uint256,string,string,uint256,string)'](config.app_id, config.signData, repay.topic_location, repay.topic_hash, repay.content, repay.reply_location, repay.reply_hash)
+      const tx2 = await socialX['reply(uint256,bytes,uint256,string,string,uint256,string)'](config.app_id, config.signData, repay.topic_network_id, repay.topic_hash, repay.content, repay.reply_network_id, repay.reply_hash)
       const result2 = await tx2.wait()
       // console.log('result', result.transactionHash)
 
       // 授权发布:signDataAgent
       await socialX.connect(user1).approve(user2.address, 10) // 授权
-      const tx3 = await socialX.connect(user2)['reply(uint256,bytes,uint256,string,string)'](config.app_id, config.signDataAgent, repay.topic_location, repay.topic_hash, repay.content)
+      const tx3 = await socialX.connect(user2)['reply(uint256,bytes,uint256,string,string)'](config.app_id, config.signDataAgent, repay.topic_network_id, repay.topic_hash, repay.content)
       const result3 = await tx3.wait()
       expect(await socialX.allowance(user1.address, user2.address)).to.equal(9)
       const TXInfo3 = await socialX.apps(APP_ID)
       expect(TXInfo3.repays).to.equal(3)
 
       // 签名发布:signDataSingle
-      const tx4 = await socialX['reply(uint256,bytes,uint256,string,string)'](config.app_id, config.signDataSingle, repay.topic_location, repay.topic_hash, repay.content)
+      const tx4 = await socialX['reply(uint256,bytes,uint256,string,string)'](config.app_id, config.signDataSingle, repay.topic_network_id, repay.topic_hash, repay.content)
       const result4 = await tx4.wait()
       const TXInfo4 = await socialX.apps(APP_ID)
       expect(TXInfo4.repays).to.equal(4)

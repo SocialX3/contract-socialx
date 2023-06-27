@@ -4,6 +4,14 @@
 
 - 2023 年 5 月 11 日: 增加授权发布方式
 - 2023 年 5 月 12 日: 参数 `sign_data` 修改为 `data`。原 `tage()` 方法内 `data 修改为 user_data`
+- 2023 年 6 月 27 日: 为了更方便宣传，将变量名`位置`改为`网络`。
+  - 全局参数 `LOCATION_ID` 修改为 `NETWORK_ID`。
+    - 代表 SocialX 协议所在的网络，后端应该有用到
+  - 方法内的参数名修改
+    - 参数名`target_location_id` 改为 `target_network_id`。涉及到方法`append`/`reply`.
+    - 参数名`target_reply_location_id` 改为 `reply_network_id`。涉及到方法 `reply`.
+  - 以上修改仅为变量名修改，不涉及逻辑改动。编辑器内全局替换相应变量即可。
+
 
 ## 方法
 
@@ -33,7 +41,7 @@ data 说明:
 
 - `uint256`app_id: 应用 ID
 - `bytes` data: 代发的相关信息，自己支付上链手续费传"0x"
-- `uint256` target_location_id:主题的网络位置
+- `uint256` target_network_id:主题的网络位置
 - `string` topic_hash:主题哈希
 - `string` content: 追加内容
 
@@ -41,10 +49,10 @@ data 说明:
 
 - `uint256`app_id: 应用 ID
 - `bytes` data: 代发的相关信息，自己支付上链手续费传"0x"
-- `uint256` target_location_id:主题的网络位置
+- `uint256` target_network_id:主题的网络位置
 - `string` topic_hash:主题哈希
 - `string` content: 回复内容
-- `string` reply_location:某条回复的网络位置(如果不针对"回复"进行回复，无该参数)
+- `string` reply_network_id:某条回复的网络位置(如果不针对"回复"进行回复，无该参数)
 - `string` reply_hash: 某条回复的网络哈希(如果不针对"回复"进行回复，无该参数)
 
 ### tags: 填写地址属性
@@ -68,7 +76,7 @@ data 说明:
 
 ## ✅ 只读信息
 
-- LOCATION_ID : 网络位置。不同的区块链网络的该值是不同的，可以通过该值判断网络位置。
+- NETWORK_ID : 网络位置。不同的区块链网络的该值是不同的，可以通过该值判断网络位置。
   - 如下是一个简单的演示
   - `1`: Fibo
   - `2`: Bitcoin
