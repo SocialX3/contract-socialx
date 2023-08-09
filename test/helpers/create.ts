@@ -1,6 +1,7 @@
 export const create = {
   node_index: '10000001999900000000',
   title: '这是一个标题信息',
+  tags: ['XXX来', 'YYY回'],
   content: `### 以太坊（Ethereum ）:下一代智能合约和去中心化应用平台
   ### 历史
    

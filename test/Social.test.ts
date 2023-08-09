@@ -10,6 +10,12 @@ import { tags } from './helpers/tags'
 export { default as jsNumberForAddress } from './utils'
 
 const APP_ID = 1
+let topicTags: any[] = []
+create.tags.forEach((item) => {
+  const info = ethers.utils.hexlify(ethers.utils.toUtf8Bytes(`${item}`))
+  topicTags.push(info)
+})
+
 describe('SocialX', function () {
   async function deployOneYearLockFixture() {
     const [owner, user1, user2, user3, user4, user5, user6, user7, user8, user9, user10] = await ethers.getSigners()
@@ -54,11 +60,11 @@ describe('SocialX', function () {
     // console.log('log,', user1.address, signDataAgent)
 
     expect(await socialX.allowance(user1.address, user2.address)).to.equal(0)
-    await expect(socialX.connect(user2).create(config.app_id, config.signDataAgent, create.node_index, create.title, create.content)).to.be.revertedWith('insufficient allowance')
+    await expect(socialX.connect(user2).create(config.app_id, config.signDataAgent, create.node_index, create.title, create.content, topicTags)).to.be.revertedWith('insufficient allowance')
 
     await socialX.connect(user1).approve(user2.address, 10) // 授权
     expect(await socialX.allowance(user1.address, user2.address)).to.equal(10)
-    await socialX.connect(user2).create(config.app_id, config.signDataAgent, create.node_index, create.title, create.content)
+    await socialX.connect(user2).create(config.app_id, config.signDataAgent, create.node_index, create.title, create.content, topicTags)
 
     expect(await socialX.allowance(user1.address, user2.address)).to.equal(9)
 
@@ -71,21 +77,21 @@ describe('SocialX', function () {
       const { socialX, user1, user2 } = await loadFixture(deployOneYearLockFixture)
 
       // 自己发布
-      const tx = await socialX.create(config.app_id, config.signData, create.node_index, create.title, create.content)
+      const tx = await socialX.create(config.app_id, config.signData, create.node_index, create.title, create.content, topicTags)
       const result = await tx.wait()
       const TXInfo = await socialX.apps(APP_ID)
       expect(TXInfo.topics).to.equal(1)
 
       // 授权发布:signDataAgent
       await socialX.connect(user1).approve(user2.address, 10) // 授权
-      const tx2 = await socialX.connect(user2).create(config.app_id, config.signDataAgent, create.node_index, create.title, create.content)
+      const tx2 = await socialX.connect(user2).create(config.app_id, config.signDataAgent, create.node_index, create.title, create.content, topicTags)
       const result2 = await tx2.wait()
       expect(await socialX.allowance(user1.address, user2.address)).to.equal(9)
       const TXInfo2 = await socialX.apps(APP_ID)
       expect(TXInfo2.topics).to.equal(2)
 
       // 签名发布:signDataSingle
-      const tx3 = await socialX.create(config.app_id, config.signDataSingle, create.node_index, create.title, create.content)
+      const tx3 = await socialX.create(config.app_id, config.signDataSingle, create.node_index, create.title, create.content, topicTags)
       const result3 = await tx3.wait()
       const TXInfo3 = await socialX.apps(APP_ID)
       expect(TXInfo3.topics).to.equal(3)

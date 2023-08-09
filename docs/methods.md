@@ -11,7 +11,7 @@
     - 参数名`target_location_id` 改为 `target_network_id`。涉及到方法`append`/`reply`.
     - 参数名`target_reply_location_id` 改为 `reply_network_id`。涉及到方法 `reply`.
   - 以上修改仅为变量名修改，不涉及逻辑改动。编辑器内全局替换相应变量即可。
-
+- 2023 年 8 月: create 方法内增加 `tags` （主体标签）
 
 ## 方法
 
@@ -36,6 +36,7 @@ data 说明:
 - `uint256` node_id:节点 ID
 - `string` title: 主题标题
 - `string` content: 主题内容
+- `bytes[]` tags: 主题标签。（`['标签1','标签2'] 直接转成bytes即可`，参考 `tags() `方法内的 user_data ）
 
 ### append: 追加主题
 
