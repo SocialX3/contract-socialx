@@ -10,7 +10,7 @@ const CONFIG = {
   },
   // hardhat / okchain
   okchain: {
-    networkId: 2,
+    networkId: 3,
   },
 }
 const config = CONFIG[hre.network.name]

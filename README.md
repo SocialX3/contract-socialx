@@ -37,3 +37,15 @@ import "hardhat/console.sol";
 
 console.log(msg.sender);
 ```
+
+## networkId
+
+```
+Fibo Chain
+networkId  : 1
+SocialX    : 0x81B51A11666Dab30f9C0B067033c08f6fFf3904E
+
+OKT Chain
+networkId  : 3
+SocialX    : 0xFDcf8E92c0B898b3bCD028FeA5243a5Ba539480b
+```

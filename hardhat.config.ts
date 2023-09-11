@@ -9,7 +9,7 @@ const config: HardhatUserConfig = {
     },
     okchain: {
       url: process.env.RPC_URL_OK,
-      accounts: [process.env.PK_ACCOUNT_1],
+      accounts: [process.env.PK_ACCOUNT_OK],
       timeout: 600000,
       blockGasLimit: 0x1fffffffffffff,
       throwOnTransactionFailures: true,
@@ -18,7 +18,7 @@ const config: HardhatUserConfig = {
     },
     fbchain: {
       url: process.env.RPC_URL_FBC,
-      accounts: [process.env.PK_ACCOUNT_1],
+      accounts: [process.env.PK_ACCOUNT_FIBO],
       timeout: 600000,
     },
   },
