@@ -14,6 +14,7 @@
     "d:fbchain": "npx hardhat run scripts/deploy.ts --network fbchain",
     "d:f": "npm run d:fbchain",
     "d:o": "npx hardhat run scripts/deploy.ts --network okchain",
+    "d:polygon": "npx hardhat run scripts/deploy.ts --network polygon",
     "remixd": "open http://remix.ethereum.org/ && remixd -s  ./  --remix-ide http://remix.ethereum.org/"
   },
   "keywords": [],

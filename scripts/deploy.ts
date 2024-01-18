@@ -12,6 +12,9 @@ const CONFIG = {
   okchain: {
     networkId: 3,
   },
+  polygon: {
+    networkId: 4,
+  },
 }
 const config = CONFIG[hre.network.name]
 // ************ 配置:结束 ************

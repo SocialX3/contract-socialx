@@ -21,6 +21,11 @@ const config: HardhatUserConfig = {
       accounts: [process.env.PK_ACCOUNT_FIBO],
       timeout: 600000,
     },
+    polygon: {
+      url: process.env.RPC_URL_POL,
+      accounts: [process.env.PK_ACCOUNT_POL],
+      timeout: 600000,
+    },
   },
   solidity: {
     version: '0.8.18',
